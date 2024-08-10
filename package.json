@@ -1,0 +1,35 @@
+{
+  "name": "find_component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --quiet",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --quiet --fix",
+    "prettier": "prettier --write 'src/**/*.{ts,tsx}'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "tsc"
+  }
+}
