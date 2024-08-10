@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "test",
-    "start": "node dist/index.js",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon",
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --quiet --fix",
@@ -30,6 +30,6 @@
       "src"
     ],
     "ext": "ts",
-    "exec": "tsc"
+    "exec": "ts-node src/index.ts"
   }
 }
