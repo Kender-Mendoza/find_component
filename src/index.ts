@@ -1,4 +1,7 @@
-console.log("Esto es una prueba desde ts");
+import validatePath from './utils/validate_path';
+
+const dirPath = process.argv.slice(2)[0] || '';
+
+validatePath(dirPath);
+
 console.log(process.argv.slice(2))
-console.log("Esto es otra prueba")
-console.log("Esto es otra de otra prueba")
