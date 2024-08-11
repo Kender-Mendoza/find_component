@@ -31,5 +31,9 @@
     ],
     "ext": "ts",
     "exec": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@types/spinnies": "^0.5.3",
+    "spinnies": "^0.5.1"
   }
 }
