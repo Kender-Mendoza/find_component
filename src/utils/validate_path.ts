@@ -10,11 +10,12 @@ const validatePath = (dirPath: string): void => {
   const resolvedPath = resolve(dirPath);
   const spinnies = addWaiting('Validating...');
 
-  if (!isValidPath(resolvedPath)) { return; };
+  if (isValidPath(resolvedPath)) {
+    changeWaitingStatus(spinnies, 'succeed', 'Path valid');
+    return;
+  };
 
-  changeWaitingStatus(spinnies, 'test');
-  console.log(`The path: ${dirPath} is invalid.`)
-  // throw new Error(`The path: ${dirPath} is invalid.`);
+  changeWaitingStatus(spinnies, 'fail', `The path ${dirPath} is invalid.`);
 };
 
 export default validatePath

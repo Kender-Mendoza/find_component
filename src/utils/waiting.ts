@@ -1,12 +1,6 @@
 import Spinnies from 'spinnies'
 
-// spinnies.add('spinner-2', { text: 'I am another spinner' });
-// setTimeout(() => {
-//   spinnies.succeed('spinner-1', { text: 'Success!' });
-//   spinnies.fail('spinner-2', { text: 'Fail :(' });
-// }, 2000);
-
-// console.log('Testing')
+type waitingStatus = 'fail' | 'succeed';
 
 export const addWaiting = (waitingText: string): Spinnies => {
   const spinnies = new Spinnies();
@@ -15,8 +9,16 @@ export const addWaiting = (waitingText: string): Spinnies => {
   return spinnies;
 }
 
-export const changeWaitingStatus = (spinnies: Spinnies, status: string): void => {
+export const changeWaitingStatus = (spinnies: Spinnies, status: waitingStatus, message: string): void => {
   setTimeout(() => {
-    spinnies.fail('spinner', { text: 'Fail 🐙' });
+    switch (status) {
+      case 'succeed':
+        spinnies.succeed('spinner', { text: `Success! ✨: ${message}` });
+        break;
+
+      case 'fail':
+        spinnies.fail('spinner', { text: `Fail 🐙: ${message}` });
+        break;
+    }
   }, 1000);
 };
