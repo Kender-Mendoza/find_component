@@ -1,4 +1,4 @@
-import Spinnies from 'spinnies'
+import Spinnies from 'spinnies';
 
 type waitingStatus = 'fail' | 'succeed';
 
