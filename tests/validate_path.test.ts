@@ -1,6 +1,5 @@
 import validatePath from '../src/utils/validate_path';
 import { addWaiting, changeWaitingStatus } from '../src/utils/waiting';
-import { existsSync, statSync } from 'fs';
 
 jest.mock('../src/utils/waiting', () => {
   return {
