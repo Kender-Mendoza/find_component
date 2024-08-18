@@ -1,4 +1,3 @@
-// import Spinnies from 'spinnies';
 import Spinnies from 'spinnies';
 import * as waitingModule from '../src/utils/waiting';
 
