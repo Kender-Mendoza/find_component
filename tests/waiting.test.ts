@@ -1,25 +1,44 @@
+// import Spinnies from 'spinnies';
 import Spinnies from 'spinnies';
-import { addWaiting, changeWaitingStatus } from '../src/utils/waiting';
+import * as waitingModule from '../src/utils/waiting';
 
-jest.mock('spinnies');
+jest.mock('spinnies', () => {
+  class Spinnies {
+    add = jest.fn();
+    succeed = jest.fn();
+    fail = jest.fn();
+  };
+
+  return Spinnies;
+});
 
 describe('Waiting utilities', () => {
-  let spinniesMock: jest.Mocked<Spinnies>;
-
-  beforeEach(() => {
-    spinniesMock = new Spinnies() as jest.Mocked<Spinnies>;
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should add a spinner with the given test', () => {
-    spinniesMock.add = jest.fn();
-    const result = addWaiting('test');
+    const waiting = waitingModule.addWaiting('testing');
 
-    expect(spinniesMock.add).toHaveBeenCalled;
-    // expect(spinniesMock.add).toHaveBeenCalledWith('spinner', { text: 'test' });
-    expect(result).toBeInstanceOf(Spinnies)
+    expect(waiting).toBeInstanceOf(Spinnies);
+    expect(waiting.add).toHaveBeenCalledWith('spinner', { text: 'testing' });
+  });
+
+  it('should change the spinner status to succeed', () => {
+    const spinner = new Spinnies();
+    waitingModule.changeWaitingStatus(spinner, 'succeed', 'testing message');
+
+    setTimeout(() => {
+      expect(spinner.succeed).toHaveBeenCalledWith('spinner', { text: `Success! ✨: testing message` });
+    }, 1000);
+  });
+
+  it('should change the spinner status to fail', () => {
+    const spinner = new Spinnies();
+    waitingModule.changeWaitingStatus(spinner, 'fail', 'testing message');
+
+    setTimeout(() => {
+      expect(spinner.fail).toHaveBeenCalledWith('spinner', { text: `Fail 🐙: testing message` });
+    }, 1000);
   });
 });
