@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@types/spinnies": "^0.5.3",
+    "glob": "^11.0.0",
     "spinnies": "^0.5.1"
   },
   "nodemonConfig": {
