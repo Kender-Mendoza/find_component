@@ -1,6 +1,6 @@
 import Spinnies from 'spinnies';
 
-type waitingStatus = 'fail' | 'succeed';
+type WaitingStatus = 'fail' | 'succeed';
 
 export const addWaiting = (waitingText: string): Spinnies => {
   const spinnies = new Spinnies();
@@ -9,7 +9,7 @@ export const addWaiting = (waitingText: string): Spinnies => {
   return spinnies;
 }
 
-export const changeWaitingStatus = (spinnies: Spinnies, status: waitingStatus, message: string): void => {
+export const changeWaitingStatus = (spinnies: Spinnies, status: WaitingStatus, message: string): void => {
   setTimeout(() => {
     switch (status) {
       case 'succeed':
