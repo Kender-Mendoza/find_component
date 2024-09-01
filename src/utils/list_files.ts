@@ -12,7 +12,9 @@ const listFiles = async (dirPath: string): Promise<string[]> => {
   const appPath = pathPrefix(dirPath);
   const files = await glob(['**/*.rb', '**/*.erb'], { cwd: appPath, ignore: foldersToIgnore })
 
-  return files;
+  return files.map((file) => {
+    return `${appPath}${file}`
+  });
 }
 
 export default listFiles;

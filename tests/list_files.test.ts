@@ -23,9 +23,9 @@ describe('list files', () => {
     const componentClassNames = await listFiles(dirPath);
 
     expect(componentClassNames).toEqual([
-      'table_row/table_row_component.rb',
-      'filter/filter_component.erb',
-      'form/form_component.rb'
+      '/example/app/table_row/table_row_component.rb',
+      '/example/app/filter/filter_component.erb',
+      '/example/app/form/form_component.rb'
     ])
   });
 });

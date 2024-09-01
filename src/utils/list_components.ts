@@ -1,4 +1,5 @@
 import { glob } from 'glob';
+import ComponentDataStruct from '../types/component_data_struct';
 
 const listFile = async (dirPath: string): Promise<string[]> => {
   const files = await glob('**/*.rb', { cwd: dirPath });
@@ -31,19 +32,22 @@ const convertPathToComponent = (path: string): string => {
   return upperCamelCaseParts.join('::');
 };
 
-const buildComponentClass = async (dirPath: string): Promise<string[]> => {
+const buildComponentClass = async (dirPath: string): Promise<ComponentDataStruct[]> => {
   const prefix = pathPrefix(dirPath);
   const filePaths = await listFile(dirPath);
 
   const classComponents =
     filePaths.map((filePath) => {
-      return convertPathToComponent(`${prefix}${filePath}`);
+      return {
+        name: convertPathToComponent(`${prefix}${filePath}`),
+        path: `${dirPath}/${filePath}`
+      };
     });
 
   return classComponents;
 };
 
-const listComponents = async (dirPath: string): Promise<string[]> => {
+const listComponents = async (dirPath: string): Promise<ComponentDataStruct[]> => {
   return buildComponentClass(dirPath);
 };
 
