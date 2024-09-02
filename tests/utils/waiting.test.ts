@@ -1,5 +1,5 @@
 import Spinnies from 'spinnies';
-import * as waitingModule from '../src/utils/waiting';
+import * as waitingModule from '../../src/utils/waiting';
 
 jest.mock('spinnies', () => {
   class Spinnies {
