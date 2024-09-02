@@ -1,7 +1,7 @@
-import validatePath from '../src/utils/validate_path';
-import { addWaiting, changeWaitingStatus } from '../src/utils/waiting';
+import validatePath from '../../src/utils/validate_path';
+import { addWaiting, changeWaitingStatus } from '../../src/utils/waiting';
 
-jest.mock('../src/utils/waiting', () => {
+jest.mock('../../src/utils/waiting', () => {
   return {
     addWaiting: jest.fn(),
     changeWaitingStatus: jest.fn()
