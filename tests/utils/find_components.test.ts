@@ -1,5 +1,11 @@
 import findComponent from '../../src/utils/find_components';
 
+jest.mock('fs', () => {
+  return {
+    createReadStream: jest.fn()
+  }
+});
+
 jest.mock('readline', () => {
   return {
     createInterface: jest.fn()
