@@ -1,6 +1,7 @@
 import { createReadStream } from "fs";
 import readline from 'readline';
 import ComponentDataStruct from "../types/component_data_struct";
+import { addWaiting, changeWaitingStatus } from './waiting'
 
 
 const searchComponent = async (componentClass: ComponentDataStruct, filePath: string): Promise<ComponentDataStruct> => {
@@ -21,6 +22,7 @@ const searchComponent = async (componentClass: ComponentDataStruct, filePath: st
 };
 
 const findComponent = async (componentList: ComponentDataStruct[], fileList: string[]): Promise<ComponentDataStruct[]> => {
+  const spinnies = addWaiting('Searching Components...');
   let componentsData: ComponentDataStruct[] = [];
   let componentData: ComponentDataStruct = {
     name: '',
@@ -41,6 +43,7 @@ const findComponent = async (componentList: ComponentDataStruct[], fileList: str
     }
   }
 
+  changeWaitingStatus(spinnies, 'succeed', `Components found ${componentsData.length}`);
   return componentsData;
 }
 
