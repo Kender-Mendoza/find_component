@@ -1,8 +1,7 @@
 import { createReadStream } from "fs";
 import readline from 'readline';
 import ComponentDataStruct from "../types/component_data_struct";
-import { addWaiting, changeWaitingStatus } from './waiting'
-
+import { addWaiting, changeWaitingStatus } from '../helpers/waiting'
 
 const searchComponent = async (componentClass: ComponentDataStruct, filePath: string): Promise<ComponentDataStruct> => {
   const fileStream = createReadStream(filePath);

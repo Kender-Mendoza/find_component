@@ -1,6 +1,6 @@
 import { existsSync, statSync } from 'fs';
 import { resolve } from 'path';
-import { addWaiting, changeWaitingStatus } from './waiting'
+import { addWaiting, changeWaitingStatus } from '../helpers/waiting'
 
 const isValidPath = (dirPath: string): boolean => {
   return existsSync(dirPath) && statSync(dirPath).isDirectory();
