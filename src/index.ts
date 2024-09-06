@@ -5,14 +5,12 @@ import findComponent from './utils/find_components';
 
 const dirPath = process.argv.slice(2)[0] || '';
 
-validatePath(dirPath);
+if (validatePath(dirPath)) {
+  (async (): Promise<void> => {
+    const componentClassNames = await listComponents(dirPath);
+    const fileList = await listFiles(dirPath);
+    const files = await findComponent(componentClassNames, fileList);
 
-const files = async (): Promise<void> => {
-  const componentClassNames = await listComponents(dirPath);
-  const fileList = await listFiles(dirPath);
-  const files = await findComponent(componentClassNames, fileList);
-
-  console.log(files);
-};
-
-files();
+    console.log(files);
+  })();
+}
