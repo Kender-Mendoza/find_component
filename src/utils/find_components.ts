@@ -17,9 +17,7 @@ const searchComponent = async (className: string, filePath: string): Promise<boo
   const rl = createFileStream(filePath);
 
   for await (const line of rl) {
-    if (line.includes(className)) {
-      return true;
-    }
+    if (line.includes(className)) { return true; }
   };
 
   return false;
@@ -32,16 +30,13 @@ const findComponent = async (componentList: ViewComponentData[], fileList: strin
 
   for (const componentClass of componentList) {
     for (const filePath of fileList) {
-      //? this is for not search the component in the same file.
       if (componentClass.path === filePath) { continue; }
 
       isUsed = await searchComponent(componentClass.className, filePath);
 
-      //? If component is used break and continue with the next file.
       if (isUsed) { break; }
     }
 
-    //? if component didn't use, save in array.
     if (!isUsed) {
       componentsData.push(componentClass);
       continue;
@@ -49,6 +44,7 @@ const findComponent = async (componentList: ViewComponentData[], fileList: strin
   }
 
   changeWaitingStatus(spinnies, 'succeed', `Components found ${componentsData.length}`);
+
   return componentsData;
 }
 
