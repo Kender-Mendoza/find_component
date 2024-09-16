@@ -20,15 +20,15 @@ describe('Find component', () => {
   it('should see list component without use', async () => {
     const componentClassList = [
       {
-        name: 'Clients::TableRow::TableRowComponent',
+        className: 'Clients::TableRow::TableRowComponent',
         path: 'table_row/table_row_component.rb'
       },
       {
-        name: 'Clients::Filter::FilterComponent',
+        className: 'Clients::Filter::FilterComponent',
         path: 'filter/filter_component.rb'
       },
       {
-        name: 'Clients::Form::FormComponent',
+        className: 'Clients::Form::FormComponent',
         path: 'form/form_component.rb'
       }
     ]
@@ -43,7 +43,7 @@ describe('Find component', () => {
 
     expect(files).toEqual([
       {
-        name: 'Clients::Form::FormComponent',
+        className: 'Clients::Form::FormComponent',
         path: 'form/form_component.rb'
       }
     ])

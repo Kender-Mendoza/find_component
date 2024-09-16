@@ -24,15 +24,15 @@ describe('list components', () => {
 
     expect(componentClassNames).toEqual([
       {
-        "name": "Clients::TableRow::TableRowComponent",
+        "className": "Clients::TableRow::TableRowComponent",
         "path": "/example/components/clients/table_row/table_row_component.rb",
       },
       {
-        "name": "Clients::Filter::FilterComponent",
+        "className": "Clients::Filter::FilterComponent",
         "path": "/example/components/clients/filter/filter_component.rb",
       },
       {
-        "name": "Clients::Form::FormComponent",
+        "className": "Clients::Form::FormComponent",
         "path": "/example/components/clients/form/form_component.rb",
       }
     ])
