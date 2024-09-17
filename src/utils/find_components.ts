@@ -2,6 +2,7 @@ import { createReadStream } from "fs";
 import readline from 'readline';
 import { ViewComponentData } from "../types/component_data_struct";
 import { addWaiting, changeWaitingStatus } from '../helpers/waiting';
+import { APP_PREFIX } from "../helpers/path_manager";
 
 const createFileStream = (filePath: string): readline.Interface => {
   const fileStream = createReadStream(filePath);
@@ -30,9 +31,11 @@ const findComponent = async (componentList: ViewComponentData[], fileList: strin
 
   for (const componentClass of componentList) {
     for (const filePath of fileList) {
-      if (componentClass.path === filePath) { continue; }
+      const absolutePath = `${APP_PREFIX}${filePath}`
 
-      isUsed = await searchComponent(componentClass.className, filePath);
+      if (componentClass.path === absolutePath) { continue; }
+
+      isUsed = await searchComponent(componentClass.className, absolutePath);
 
       if (isUsed) { break; }
     }

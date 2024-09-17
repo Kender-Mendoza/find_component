@@ -1,20 +1,11 @@
 import { glob } from 'glob';
+import { APP_PREFIX } from "../helpers/path_manager";
 
-const pathPrefix = (dirPath: string): string => {
-  const keyword = 'components';
-  const keywordIndex = dirPath.indexOf(keyword);
-
-  return dirPath.slice(0, keywordIndex);
-};
-
-const listFiles = async (dirPath: string): Promise<string[]> => {
+const listFiles = async (): Promise<string[]> => {
   const foldersToIgnore = ['assets/**', 'channels/**', 'javascript/**', 'uploaders/**'];
-  const appPath = pathPrefix(dirPath);
-  const files = await glob(['**/*.rb', '**/*.erb'], { cwd: appPath, ignore: foldersToIgnore })
+  const files = await glob(['**/*.rb', '**/*.erb'], { cwd: APP_PREFIX, ignore: foldersToIgnore })
 
-  return files.map((file) => {
-    return `${appPath}${file}`
-  });
+  return files
 }
 
 export default listFiles;

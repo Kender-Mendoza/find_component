@@ -1,5 +1,18 @@
 import findComponent from '../../src/utils/find_components';
 
+jest.mock('../../src/helpers/waiting', () => {
+  return {
+    addWaiting: jest.fn(),
+    changeWaitingStatus: jest.fn()
+  };
+});
+
+jest.mock('../../src/helpers/path_manager', () => {
+  return {
+    APP_PREFIX: jest.fn().mockReturnValue('/example/app/components')
+  };
+});
+
 jest.mock('fs', () => {
   return {
     createReadStream: jest.fn()
