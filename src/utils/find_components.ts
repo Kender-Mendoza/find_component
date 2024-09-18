@@ -1,8 +1,8 @@
-import { createReadStream } from "fs";
+import { createReadStream } from 'fs';
 import readline from 'readline';
-import { ViewComponentData } from "../types/component_data_struct";
+import { ViewComponentData } from '../types/component_data_struct';
 import { addWaiting, changeWaitingStatus } from '../helpers/waiting';
-import { APP_PREFIX } from "../helpers/path_manager";
+import { DIR_APP_PATH } from '../constants/path';
 
 const createFileStream = (filePath: string): readline.Interface => {
   const fileStream = createReadStream(filePath);
@@ -31,7 +31,7 @@ const findComponent = async (componentList: ViewComponentData[], fileList: strin
 
   for (const componentClass of componentList) {
     for (const filePath of fileList) {
-      const absolutePath = `${APP_PREFIX}${filePath}`
+      const absolutePath = `${DIR_APP_PATH}${filePath}`
 
       if (componentClass.path === absolutePath) { continue; }
 

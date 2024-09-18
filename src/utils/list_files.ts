@@ -1,9 +1,9 @@
 import { glob } from 'glob';
-import { APP_PREFIX } from "../helpers/path_manager";
+import { DIR_APP_PATH } from '../constants/path';
 
 const listFiles = async (): Promise<string[]> => {
   const foldersToIgnore = ['assets/**', 'channels/**', 'javascript/**', 'uploaders/**'];
-  const files = await glob(['**/*.rb', '**/*.erb'], { cwd: APP_PREFIX, ignore: foldersToIgnore })
+  const files = await glob(['**/*.rb', '**/*.erb'], { cwd: DIR_APP_PATH, ignore: foldersToIgnore })
 
   return files
 }

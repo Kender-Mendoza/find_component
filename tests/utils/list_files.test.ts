@@ -1,15 +1,15 @@
 import listFiles from '../../src/utils/list_files';
 
-jest.mock('../../src/helpers/path_manager', () => {
+jest.mock('../../src/constants/path', () => {
   return {
-    APP_PREFIX: jest.fn().mockReturnValue('/example/app/components')
+    DIR_APP_PATH: '/example/app/components'
   };
 });
 
 jest.mock('glob', () => {
   return {
     glob: jest.fn()
-      .mockReturnValue(new Promise((resolve, reject) => {
+      .mockReturnValue(new Promise((resolve) => {
         resolve([
           'table_row/table_row_component.rb',
           'filter/filter_component.erb',

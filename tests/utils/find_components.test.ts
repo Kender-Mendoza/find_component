@@ -7,9 +7,9 @@ jest.mock('../../src/helpers/waiting', () => {
   };
 });
 
-jest.mock('../../src/helpers/path_manager', () => {
+jest.mock('../../src/constants/path', () => {
   return {
-    APP_PREFIX: jest.fn().mockReturnValue('/example/app/components')
+    DIR_APP_PATH: '/example/app/components'
   };
 });
 
