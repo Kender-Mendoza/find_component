@@ -1,45 +1,52 @@
-import { createReadStream } from "fs";
+import { createReadStream } from 'fs';
 import readline from 'readline';
-import ComponentDataStruct from "../types/component_data_struct";
+import { ViewComponentData } from '../types/component_data_struct';
+import { addWaiting, changeWaitingStatus } from '../helpers/waiting';
+import { DIR_APP_PATH } from '../constants/path';
 
-
-const searchComponent = async (componentClass: ComponentDataStruct, filePath: string): Promise<ComponentDataStruct> => {
+const createFileStream = (filePath: string): readline.Interface => {
   const fileStream = createReadStream(filePath);
   const rl = readline.createInterface({
     input: fileStream,
     crlfDelay: Infinity
   });
 
+  return rl;
+}
+
+const searchComponent = async (className: string, filePath: string): Promise<boolean> => {
+  const rl = createFileStream(filePath);
+
   for await (const line of rl) {
-    if (line.includes(componentClass.name)) {
-      componentClass.used = true;
-      break;
-    }
+    if (line.includes(className)) { return true; }
   };
 
-  return componentClass;
+  return false;
 };
 
-const findComponent = async (componentList: ComponentDataStruct[], fileList: string[]): Promise<ComponentDataStruct[]> => {
-  let componentsData: ComponentDataStruct[] = [];
-  let componentData: ComponentDataStruct = {
-    name: '',
-    path: ''
-  };
+const findComponent = async (componentList: ViewComponentData[], fileList: string[]): Promise<ViewComponentData[]> => {
+  const spinnies = addWaiting('Searching Components...');
+  const componentsData: ViewComponentData[] = [];
+  let isUsed = false;
 
   for (const componentClass of componentList) {
     for (const filePath of fileList) {
-      if (componentClass.path === filePath) { continue; }
+      const absolutePath = `${DIR_APP_PATH}${filePath}`
 
-      componentData = await searchComponent(componentClass, filePath);
-      if (componentData.used) { break; }
+      if (componentClass.path === absolutePath) { continue; }
+
+      isUsed = await searchComponent(componentClass.className, absolutePath);
+
+      if (isUsed) { break; }
     }
 
-    if (!componentData.used) {
-      componentsData.push(componentData);
+    if (!isUsed) {
+      componentsData.push(componentClass);
       continue;
     }
   }
+
+  changeWaitingStatus(spinnies, 'succeed', `Components found ${componentsData.length}`);
 
   return componentsData;
 }

@@ -1,7 +1,4 @@
-type ComponentDataStruct = {
-  name: string,
-  path: string,
-  used?: boolean
-};
-
-export default ComponentDataStruct;
+export type ViewComponentData = {
+  className: string,
+  path: string
+}

@@ -1,5 +1,5 @@
 import Spinnies from 'spinnies';
-import * as waitingModule from '../../src/utils/waiting';
+import * as waitingModule from '../../src/helpers/waiting';
 
 jest.mock('spinnies', () => {
   class Spinnies {
@@ -27,17 +27,13 @@ describe('Waiting utilities', () => {
     const spinner = new Spinnies();
     waitingModule.changeWaitingStatus(spinner, 'succeed', 'testing message');
 
-    setTimeout(() => {
-      expect(spinner.succeed).toHaveBeenCalledWith('spinner', { text: `Success! ✨: testing message` });
-    }, 1000);
+    expect(spinner.succeed).toHaveBeenCalledWith('spinner', { text: `Success! ✨: testing message` });
   });
 
   it('should change the spinner status to fail', () => {
     const spinner = new Spinnies();
     waitingModule.changeWaitingStatus(spinner, 'fail', 'testing message');
 
-    setTimeout(() => {
-      expect(spinner.fail).toHaveBeenCalledWith('spinner', { text: `Fail 🐙: testing message` });
-    }, 1000);
+    expect(spinner.fail).toHaveBeenCalledWith('spinner', { text: `Fail 🐙: testing message` });
   });
 });

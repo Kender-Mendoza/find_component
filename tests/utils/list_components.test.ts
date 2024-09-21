@@ -1,9 +1,15 @@
 import listComponents from '../../src/utils/list_components';
 
+jest.mock('../../src/constants/path', () => {
+  return {
+    DIR_PATH: '/example/components/clients'
+  };
+});
+
 jest.mock('glob', () => {
   return {
     glob: jest.fn()
-      .mockReturnValue(new Promise((resolve, reject) => {
+      .mockReturnValue(new Promise((resolve) => {
         resolve([
           'table_row/table_row_component.rb',
           'filter/filter_component.rb',
@@ -19,20 +25,19 @@ describe('list components', () => {
   });
 
   it('should see list component from a list path', async () => {
-    const dirPath = '/example/components/clients';
-    const componentClassNames = await listComponents(dirPath);
+    const componentClassNames = await listComponents();
 
     expect(componentClassNames).toEqual([
       {
-        "name": "Clients::TableRow::TableRowComponent",
+        "className": "Clients::TableRow::TableRowComponent",
         "path": "/example/components/clients/table_row/table_row_component.rb",
       },
       {
-        "name": "Clients::Filter::FilterComponent",
+        "className": "Clients::Filter::FilterComponent",
         "path": "/example/components/clients/filter/filter_component.rb",
       },
       {
-        "name": "Clients::Form::FormComponent",
+        "className": "Clients::Form::FormComponent",
         "path": "/example/components/clients/form/form_component.rb",
       }
     ])

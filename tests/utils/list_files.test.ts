@@ -1,9 +1,15 @@
 import listFiles from '../../src/utils/list_files';
 
+jest.mock('../../src/constants/path', () => {
+  return {
+    DIR_APP_PATH: '/example/app/components'
+  };
+});
+
 jest.mock('glob', () => {
   return {
     glob: jest.fn()
-      .mockReturnValue(new Promise((resolve, reject) => {
+      .mockReturnValue(new Promise((resolve) => {
         resolve([
           'table_row/table_row_component.rb',
           'filter/filter_component.erb',
@@ -19,13 +25,12 @@ describe('list files', () => {
   });
 
   it('should see list files from a path', async () => {
-    const dirPath = '/example/app/components';
-    const componentClassNames = await listFiles(dirPath);
+    const componentClassNames = await listFiles();
 
     expect(componentClassNames).toEqual([
-      '/example/app/table_row/table_row_component.rb',
-      '/example/app/filter/filter_component.erb',
-      '/example/app/form/form_component.rb'
+      'table_row/table_row_component.rb',
+      'filter/filter_component.erb',
+      'form/form_component.rb'
     ])
   });
 });
