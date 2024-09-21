@@ -10,6 +10,6 @@ if (validatePath(DIR_PATH)) {
     const fileList = await listFiles();
     const files = await findComponent(componentClassNames, fileList);
 
-    console.log(files);
+    console.table(files);
   })();
 }
