@@ -17,7 +17,7 @@ npm install
 
 ## Usage
 
-Run in the console inside the project:
+Run in the console inside the project with the absolute path of project with view components:
 ```bash
 npm start rubyProject/viewcomponet/folder/absolute/path
 ```
